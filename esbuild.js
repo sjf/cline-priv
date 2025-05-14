@@ -119,7 +119,8 @@ const copyWasmFiles = {
 	},
 }
 
-const extensionConfig = {
+// Base configuration shared between extension and standalone builds
+const baseConfig = {
 	bundle: true,
 	minify: production,
 	sourcemap: !production,
@@ -142,16 +143,29 @@ const extensionConfig = {
 			},
 		},
 	],
-	entryPoints: [standalone ? "src/standalone/extension-standalone.ts" : "src/extension.ts"],
 	format: "cjs",
 	sourcesContent: false,
 	platform: "node",
-	outfile: standalone ? `${destDir}/extension-standalone.js` : `${destDir}/extension.js`,
 	external: ["vscode"],
 }
 
+// Extension-specific configuration
+const extensionConfig = {
+	...baseConfig,
+	entryPoints: ["src/extension.ts"],
+	outfile: `${destDir}/extension.js`,
+}
+
+// Standalone-specific configuration
+const standaloneConfig = {
+	...baseConfig,
+	entryPoints: ["src/standalone/standalone.ts"],
+	outfile: `${destDir}/standalone.js`,
+}
+
 async function main() {
-	const extensionCtx = await esbuild.context(extensionConfig)
+	const config = standalone ? standaloneConfig : extensionConfig
+	const extensionCtx = await esbuild.context(config)
 	if (watch) {
 		await extensionCtx.watch()
 	} else {

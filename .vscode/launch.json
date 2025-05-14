@@ -53,7 +53,7 @@
 				"GRPC_TRACE": "all",
 				"GRPC_VERBOSITY": "DEBUG"
 			},
-			"program": "extension-standalone.js"
+			"program": "standalone.js"
 		}
 	]
 }

@@ -4,7 +4,7 @@ import * as health from "grpc-health-check"
 
 import { activate } from "../extension"
 import { Controller } from "../core/controller"
-import { extensionContext, outputChannel, postMessage } from "./vscode-impls"
+import { extensionContext, outputChannel, postMessage } from "./vscode-context"
 import { packageDefinition, proto, log, camelToSnakeCase, snakeToCamelCase } from "./utils"
 import { GrpcHandler, GrpcStreamingResponseHandler } from "./grpc-types"
 import { addServices } from "./server-setup"

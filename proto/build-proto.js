@@ -95,7 +95,6 @@ async function main() {
 
 	console.log(chalk.green("Protocol Buffer code generation completed successfully."))
 	console.log(chalk.green(`TypeScript files generated in: ${TS_OUT_DIR}`))
-
 	await generateMethodRegistrations()
 	await generateServiceConfig()
 	await generateGrpcClientConfig()
